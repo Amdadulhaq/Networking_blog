@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Link to a CSS file (replace the path if needed) -->
+  <link rel="stylesheet" href="../css/osi.css" />
+  <title>OSI Model - Haq Network</title>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./networking-fundamentals.html">Networking Fundamentals</a></li>
+      <li><a href="./hardware-knowledge.html">Hardware Knowledge</a></li>
+      <li><a href="./networking-protocols.html">Networking Protocols</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>OSI Model Overview</h1>
+      <img src="../images/image.png" alt="OSI Model Diagram" />
+    </div>
+  </header>
+  
+  <!-- Main Content Section -->
+  <section class="section">
+    <h2>What is the OSI Model?</h2>
+    <p class="intro">
+      The Open Systems Interconnection (OSI) model is a conceptual framework 
+      used to describe the functions of a networking system. It divides network 
+      communication into seven distinct layers, from the physical transmission 
+      of data to the application-level interactions.
+    </p>
+
+    <div class="osi-layers">
+      <!-- Layer 1 -->
+      <div class="layer">
+        <h3>Layer 1: Physical</h3>
+        <p>Deals with the physical transmission of raw bits over a medium (cables, fibers, radio signals).</p>
+      </div>
+
+      <!-- Layer 2 -->
+      <div class="layer">
+        <h3>Layer 2: Data Link</h3>
+        <p>Responsible for node-to-node data transfer and handles error detection and correction.</p>
+      </div>
+
+      <!-- Layer 3 -->
+      <div class="layer">
+        <h3>Layer 3: Network</h3>
+        <p>Manages routing and forwarding of data packets across different networks (e.g., IP addresses).</p>
+      </div>
+
+      <!-- Layer 4 -->
+      <div class="layer">
+        <h3>Layer 4: Transport</h3>
+        <p>Ensures complete data transfer with flow control and error recovery (e.g., TCP and UDP).</p>
+      </div>
+
+      <!-- Layer 5 -->
+      <div class="layer">
+        <h3>Layer 5: Session</h3>
+        <p>Establishes, manages, and terminates sessions between end-user applications.</p>
+      </div>
+
+      <!-- Layer 6 -->
+      <div class="layer">
+        <h3>Layer 6: Presentation</h3>
+        <p>Translates and formats data for the application layer, handling encryption and compression.</p>
+      </div>
+
+      <!-- Layer 7 -->
+      <div class="layer">
+        <h3>Layer 7: Application</h3>
+        <p>Provides network services to end-user applications (e.g., HTTP, SMTP, FTP).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Haq Network. All rights reserved.</p>
+  </footer>
+</body>
+</html>
